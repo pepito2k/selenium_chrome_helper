@@ -1,6 +1,4 @@
 # frozen_string_literal: true
 
 require 'selenium_chrome_helper/version'
-
-# Auto-load rake tasks when included in a Rails app or via `require`
-load File.expand_path('tasks/install.rake', __dir__)
+require 'selenium_chrome_helper/railtie' if defined?(Rails::Railtie)
