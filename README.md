@@ -75,6 +75,16 @@ RSpec.configure do |config|
 end
 ```
 
+If you need a non-headless browser for debugging, you can use the `:chrome_for_testing_gui` driver:
+
+```ruby
+RSpec.configure do |config|
+  config.before(:each, type: :system) do
+    driven_by :chrome_for_testing_gui
+  end
+end
+```
+
 Optionally, you can override the version by setting the `SELENIUM_CHROME_VERSION` environment variable:
 
 ```bash
