@@ -23,7 +23,7 @@ module SeleniumChromeHelper
         Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
       end
 
-      Capybara.register_driver :chrome_for_testing do |app|
+      Capybara.register_driver :chrome_for_testing_gui do |app|
         Selenium::WebDriver::Chrome::Service.driver_path = driver_path
 
         options = configure_browser_options(chrome_path, headless: false)
