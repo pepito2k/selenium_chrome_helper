@@ -22,7 +22,7 @@ namespace :chrome do
                  raise "Unsupported platform: #{RUBY_PLATFORM}"
                end
 
-    puts " ➡️ Platform: #{platform}"
+    puts " 💻 Platform: #{platform}"
     puts " 📡 Fetching metadata for Chrome version #{version}..."
 
     json = URI.open(api_url).read
