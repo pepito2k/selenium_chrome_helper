@@ -78,6 +78,7 @@ namespace :chrome do
     create_entry_directory(entry_path)
     extract_entry(entry, entry_path)
     make_executable_if_chromedriver(entry, entry_path)
+    make_executable_if_chrome(entry, entry_path)
   end
 
   def create_entry_directory(entry_path)
@@ -92,6 +93,17 @@ namespace :chrome do
     return unless entry.name =~ /chromedriver$/ && File.exist?(entry_path)
 
     FileUtils.chmod('+x', entry_path)
+  end
+
+  def make_executable_if_chrome
+    return unless RUBY_PLATFORM =~ /darwin/
+
+    FileUtils.chmod('+x', entry_path) if entry.name.end_with?('MacOS/Google Chrome for Testing')
+
+    return unless entry.name.include?('Google Chrome for Testing.app')
+
+    app_bundle_root = entry_path[/.*Google Chrome for Testing\.app/]
+    system('xattr', '-d', 'com.apple.quarantine', app_bundle_root) if app_bundle_root && File.exist?(app_bundle_root)
   end
 end
 # rubocop:enable Metrics/BlockLength, Security/Open
