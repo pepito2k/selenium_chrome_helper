@@ -61,10 +61,12 @@ bundle exec rake chrome:install[123.0.6312.86]
 This will download Chrome and Chromedriver into:
 
 ```
-chrome-for-testing/<version>/
+.chrome-for-testing/<version>/
 ├── chrome-<platform>/
 ├── chromedriver-<platform>/
 ```
+
+I recommend adding the `.chrome-for-testing` directory to your `.gitignore` file
 
 The gem will automatically register a `:chrome_for_testing` Capybara driver when used in a Rails app, using the `Rails.root` path and the platform-specific Chrome/Chromedriver for the current system.
 
