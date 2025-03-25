@@ -95,7 +95,7 @@ namespace :chrome do
     FileUtils.chmod('+x', entry_path)
   end
 
-  def make_executable_if_chrome
+  def make_executable_if_chrome(entry, entry_path)
     return unless RUBY_PLATFORM =~ /darwin/
 
     FileUtils.chmod('+x', entry_path) if entry.name.end_with?('MacOS/Google Chrome for Testing')
