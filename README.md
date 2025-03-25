@@ -28,8 +28,8 @@ Add this gem to your Rails app or test suite:
 
 ```ruby
 # Gemfile
-group :test do
-  gem "selenium_chrome_helper", path: "path/to/local/gem" # or from RubyGems later
+group :development, :test do
+  gem "selenium_chrome_helper"
 end
 ```
 

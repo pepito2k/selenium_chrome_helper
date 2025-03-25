@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Downloads and installs Chrome for Testing for use with Selenium system specs.'
   spec.description   = 'Adds a rake task (`chrome:install`) to easily fetch a pinned version of Chrome and Chromedriver locally or in CI.'
-  spec.homepage      = 'https://github.com/yourname/selenium_chrome_helper'
+  spec.homepage      = 'https://github.com/pepito2k/selenium_chrome_helper'
   spec.license       = 'MIT'
 
   spec.files         = Dir['lib/**/*.rb', 'lib/**/*.rake']
