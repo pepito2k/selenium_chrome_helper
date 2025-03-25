@@ -11,7 +11,7 @@ module SeleniumChromeHelper
   # It registers two drivers: one for headless testing and one for non-headless testing.
   class Railtie < Rails::Railtie
     rake_tasks do
-      load File.expand_path('../tasks/install.rake', __dir__)
+      Dir[File.expand_path('../tasks/*.rake', __dir__)].each { |task| load task }
     end
 
     initializer 'selenium_chrome_helper.configure_capybara' do
