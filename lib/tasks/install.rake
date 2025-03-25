@@ -3,7 +3,6 @@
 require 'fileutils'
 require 'open-uri'
 require 'json'
-require 'zip'
 
 # rubocop:disable Metrics/BlockLength, Security/Open
 namespace :chrome do
@@ -64,46 +63,7 @@ namespace :chrome do
   end
 
   def unzip(zip_path, extract_to)
-    Zip::File.open(zip_path) do |zip_file|
-      zip_file.each do |entry|
-        process_entry(entry, extract_to)
-      end
-    end
-  end
-
-  def process_entry(entry, extract_to)
-    return if entry.symlink? # silently skip symlinks
-
-    entry_path = File.join(extract_to, entry.name)
-    create_entry_directory(entry_path)
-    extract_entry(entry, entry_path)
-    make_executable_if_chromedriver(entry, entry_path)
-    make_executable_if_chrome(entry, entry_path)
-  end
-
-  def create_entry_directory(entry_path)
-    FileUtils.mkdir_p(File.dirname(entry_path))
-  end
-
-  def extract_entry(entry, entry_path)
-    entry.extract(entry_path) unless File.exist?(entry_path)
-  end
-
-  def make_executable_if_chromedriver(entry, entry_path)
-    return unless entry.name =~ /chromedriver$/ && File.exist?(entry_path)
-
-    FileUtils.chmod('+x', entry_path)
-  end
-
-  def make_executable_if_chrome(entry, entry_path)
-    return unless RUBY_PLATFORM =~ /darwin/
-
-    FileUtils.chmod('+x', entry_path) if entry.name.end_with?('MacOS/Google Chrome for Testing')
-
-    return unless entry.name.include?('Google Chrome for Testing.app')
-
-    app_bundle_root = entry_path[/.*Google Chrome for Testing\.app/]
-    system('xattr', '-d', 'com.apple.quarantine', app_bundle_root) if app_bundle_root && File.exist?(app_bundle_root)
+    system("unzip -q '#{zip_path}' -d '#{extract_to}'") || abort(" ❌ Failed to unzip #{zip_path}")
   end
 end
 # rubocop:enable Metrics/BlockLength, Security/Open
