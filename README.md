@@ -1,4 +1,7 @@
-# selenium_chrome_helper
+# Selenium Chrome Helper
+[![Gem Version](https://badge.fury.io/rb/selenium_chrome_helper.svg)](https://badge.fury.io/rb/selenium_chrome_helper)
+
+![Logo](logo.png)
 
 📦 A lightweight gem that installs and configures a specific version of **Chrome for Testing** and its matching **Chromedriver** for use with Selenium/Capybara system specs in Ruby and Rails projects.
 
